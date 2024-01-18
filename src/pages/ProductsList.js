@@ -38,12 +38,18 @@ function ProductsList() {
           {products.map(product => (
             <div className="col" key={product.id}>
               <div className="card">
-                <img src={`https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`} className="card-img-top" alt="{product.title}" style={{height:"200px",width:"260px"}} />
+                <img src={`https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`} className="card-img-top" alt="{product.title}" style={{height:"200px",width:"355px"}} />
                 <div className="card-body">
+                <p className="card-text">{
+                    product.stock > 0 ? 
+                    <span style={{color: 'green'}}>In Stock</span> : 
+                    <span style={{color: 'red'}}>Out of Stock</span>
+                  }</p>
                   <p className="card-title"><b>{product.title}</b></p>
                   {/* <p className="card-text">{product.category}</p> */}
                   <p className="card-text">Price:{product.price}$</p>
                   <p className="card-text"><b>Rating:{product.rating}</b></p>
+                  <button className="cart">Add To Cart</button>
                   
                 </div>
               </div>

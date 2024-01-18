@@ -76,6 +76,9 @@
     border: none;
 }
 
-/* .card {
-    height: 100px;
-} */
+.cart {
+    background-color:rgb(3, 19, 3); 
+    color:white;
+    border: none;
+    border-radius: 10px;
+}
