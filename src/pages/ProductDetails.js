@@ -9,6 +9,11 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const params = useParams();
 
+    const formatPrice = (price) => {
+        return `$${price.toFixed(2)}`;
+    };
+
+
     useEffect(() => {
         axiosInstance.get(`/products/${params.id}`)
             .then(response => {
@@ -51,7 +56,7 @@ const ProductDetails = () => {
                                 <p>{product.description}</p>
                                 
                                 <hr className='mt-3 me-3'></hr>
-                               
+                                <h2> {formatPrice(product.price)} </h2>
                                 <hr className='mt-3 me-3'></hr>
 
                                 <button className='stock'> {product.stock !== 0}In stock</button>
