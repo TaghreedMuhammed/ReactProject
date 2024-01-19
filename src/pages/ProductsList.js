@@ -1,9 +1,12 @@
 import { useState,useEffect } from "react";
 import './products.css';
 import { axiosInstance } from '../apis/config';
+import { useNavigate } from 'react-router-dom';
+
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
@@ -15,6 +18,11 @@ function ProductsList() {
         console.log(err);
       });
   }, []);
+
+
+
+
+
   console.log(products);
   return (
     <div className="container">
@@ -49,6 +57,9 @@ function ProductsList() {
                   {/* <p className="card-text">{product.category}</p> */}
                   <p className="card-text">Price:{product.price}$</p>
                   <p className="card-text"><b>Rating:{product.rating}</b></p>
+                  
+                  <button onClick={() => navigate(`/ProductDetails/${product.id}`)}  >ProductDetails</button>
+                    
                   <button className="cart">Add To Cart</button>
                   
                 </div>
