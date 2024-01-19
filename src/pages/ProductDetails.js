@@ -42,16 +42,16 @@ const ProductDetails = () => {
                         <div className=' col-lg-6  col-md-12 col-sm-12  '>
                             <div className='proThumbnail '> <img className='proImg' src={product.thumbnail} alt='' /></div>
 
-                            <CardGroup className='mt-2'>
-                                {product.images.map((imageUrl, index) => (
-                                    <Card key={index} className='proImages  me-1 ms-1'>
-                                        <Card.Img className='proImg' variant="top" src={imageUrl} alt={`Image ${index + 1}`} />
-                                    </Card>
-                                ))}
-                            </CardGroup>
 
-
-                           
+                            {product.images.length > 1 ? (
+                                <CardGroup className='mt-2'>
+                                    {product.images.map((imageUrl, index) => (
+                                        <Card key={index} className='proImages me-1 ms-1'>
+                                            <Card.Img className='proImg' variant="top" src={imageUrl} alt={`Image ${index + 1}`} />
+                                        </Card>
+                                    ))}
+                                </CardGroup>
+                            ) : <></>}
 
                         </div >
                         <div className='offset-lg-1  offset-md-0  offset-sm-0   offset-1 col-lg-4 col-md-12 col-sm-12 title'>

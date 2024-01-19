@@ -57,8 +57,8 @@ function ProductsList() {
                   {/* <p className="card-text">{product.category}</p> */}
                   <p className="card-text">Price:{product.price}$</p>
                   <p className="card-text"><b>Rating:{product.rating}</b></p>
-                  
-                  <button onClick={() => navigate(`/ProductDetails/${product.id}`)}  >ProductDetails</button>
+
+                  <button   onClick={() => navigate(`/ProductDetails/${product.id}`)}  >ProductDetails</button>
                     
                   <button className="cart">Add To Cart</button>
                   
