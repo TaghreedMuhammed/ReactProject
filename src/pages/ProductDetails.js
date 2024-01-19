@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { Card, CardGroup } from 'react-bootstrap';
 import { axiosInstance } from '../apis/config';
-
+import './ProductDetailsCss.css'
 
 const ProductDetails = () => {
 
@@ -31,12 +31,12 @@ const ProductDetails = () => {
                     <div className='d-flex flex-lg-row flex-md-column flex-sm-column  col-12'>
 
                         <div className='  col-lg-6 col-md-12 col-sm-12 '>
-                            <div > <img  src={product.thumbnail} alt='' /></div>
+                            <div className='proThumbnail'> <img className='proImg' src={product.thumbnail} alt='' /></div>
 
                             <CardGroup className='mt-2'>
                                 {product.images.map((imageUrl, index) => (
-                                    <Card key={index} className='  me-1 ms-1'>
-                                        <Card.Img  variant="top" src={imageUrl} alt={`Image ${index + 1}`} />
+                                    <Card key={index} className='proImages  me-1 ms-1'>
+                                        <Card.Img className='proImg' variant="top" src={imageUrl} alt={`Image ${index + 1}`} />
                                     </Card>
                                 ))}
                             </CardGroup>
@@ -54,23 +54,23 @@ const ProductDetails = () => {
                                
                                 <hr className='mt-3 me-3'></hr>
 
-                                <button > {product.stock !== 0}In stock</button>
+                                <button className='stock'> {product.stock !== 0}In stock</button>
                                 <p>More Information</p>
                                 <div>
-                                    <button > {product.category}</button>
-                                    <button > {product.brand}</button></div>
+                                    <button className='category'> {product.category}</button>
+                                    <button className='category'> {product.brand}</button></div>
                             </div>
                             <hr className='mt-3 me-3'></hr>
 
                             <div className='d-flex flex-row'> {product.stock !== 0 ?
-                                (<> <button > - 1 +</button>
-                                    <p>Only <span  >{product.stock}</span>  left! Don't miss it</p> </>)
+                                (<> <button className='category'> - 1 +</button>
+                                    <p>Only <span className='left' >{product.stock}</span>  left! Don't miss it</p> </>)
                                 : (<p>Out of Stock</p>)
                             }
                             </div>
 
 
-                            <div><button className='mt-1 '>Add to cart</button></div>
+                            <div><button className='mt-1 add'>Add to cart</button></div>
                             <hr className='mt-3 me-3'></hr>
 
                         </div>
