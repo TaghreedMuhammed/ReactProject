@@ -12,7 +12,11 @@ const ProductDetails = () => {
     const formatPrice = (price) => {
         return `$${price.toFixed(2)}`;
     };
-
+    const calculateMonthlyPayment = (price, discountPercentage, financingMonths) => {
+        const discountedPrice = price - (price * discountPercentage) / 100;
+        const monthlyPayment = discountedPrice / financingMonths;
+        return monthlyPayment.toFixed(2);
+    };
 
     useEffect(() => {
         axiosInstance.get(`/products/${params.id}`)
@@ -56,7 +60,7 @@ const ProductDetails = () => {
                                 <p>{product.description}</p>
                                 
                                 <hr className='mt-3 me-3'></hr>
-                                <h2> {formatPrice(product.price)} </h2>
+                                <h2> {formatPrice(product.price)} or ${calculateMonthlyPayment(product.price, product.discountPercentage, 6)}/month</h2>
                                 <hr className='mt-3 me-3'></hr>
 
                                 <button className='stock'> {product.stock !== 0}In stock</button>
