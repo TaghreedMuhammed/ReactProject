@@ -51,7 +51,7 @@ const ProductDetails = () => {
                                         </Card>
                                     ))}
                                 </CardGroup>
-                            ) : <></>}
+                            ) : <p></p>}
 
                         </div >
                         <div className='offset-lg-1  offset-md-0  offset-sm-0   offset-1 col-lg-4 col-md-12 col-sm-12 title'>
