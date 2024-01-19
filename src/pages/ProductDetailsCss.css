@@ -1,3 +1,10 @@
+.all{
+height: 80vh !important;
+width: 90vw !important;
+
+}
+
+
 .proThumbnail {
 
     box-shadow: 5PX 5PX 5PX gray;
