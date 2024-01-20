@@ -7,8 +7,9 @@ import './ProductsList.css';
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
+  const [query,setQuery] = useState("");
   const navigate = useNavigate();
-  const itemsPerPage = 6; // Number of items to display per page
+
 
   useEffect(() => {
     axiosInstance
@@ -21,20 +22,35 @@ function ProductsList() {
       });
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
 
+  
+
+
+  //search
+  const filteredProducts = products.filter(product => {
+    if (query === '') {
+      return true;
+    } else if (product.title && product.title.toLowerCase().includes(query.toLowerCase())) {
+      return true; 
+    } else {
+      return false;
+    }
+  });
+//pagination
+  const itemsPerPage = 6; 
+  const [currentPage, setCurrentPage] = useState(1);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const dataPerPage = filteredProducts.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const dataPerPage = products.slice(startIndex, endIndex);
 
   return (
     <div className="container">
       <p style={{ marginTop: "10px" }}><b>Welcome To Our Store, Start browsing...</b></p>
-      <input type="text" placeholder="Search and Explore.." className="search" />
+      <input type="text" placeholder="Search and Explore.." className="search"  onChange={event => setQuery(event.target.value)}/>
       <button className="but1">Search</button>
 
       <div className="category">
@@ -50,27 +66,28 @@ function ProductsList() {
         </div>
 
         <div className="row row-cols-1 row-cols-md-3 g-4 mt-3">
-          {dataPerPage.map(product => (
+          {dataPerPage.map((product,id) => (
             <div className="col" key={product.id}>
-              <div className="card">
-                <img src={`https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`} className="card-img-top" alt="{product.title}" style={{height:"200px",width:"355px"}} />
-                <div className="card-body">
-                  <p className="card-text">
-                    {product.stock > 0 ? 
-                      <span style={{color: 'green'}}>In Stock</span> : 
-                      <span style={{color: 'red'}}>Out of Stock</span>
-                    }
-                  </p>
-                  <p className="card-title"><b>{product.title}</b></p>
-                  <p className="card-text">Price: {product.price}$</p>
-                  <p className="card-text"><b>Rating: {product.rating}</b></p>
+            <div className="card">
+              <img src={`https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`} className="card-img-top" alt="{product.title}" style={{height:"200px",width:"355px"}} />
+              <div className="card-body">
+                <p className="card-text">
+                  {product.stock > 0 ? 
+                    <span style={{color: 'green'}}>In Stock</span> : 
+                    <span style={{color: 'red'}}>Out of Stock</span>
+                  }
+                </p>
+                <p className="card-title"><b>{product.title}</b></p>
+                <p className="card-text">Price: {product.price}$</p>
+                <p className="card-text"><b>Rating: {product.rating}</b></p>
 
-                  <button onClick={() => navigate(`/ProductDetails/${product.id}`)}>ProductDetails</button>
-                  <button className="cart">Add To Cart</button>
-                </div>
+                <button onClick={() => navigate(`/ProductDetails/${product.id}`)}>ProductDetails</button>
+                <button className="cart">Add To Cart</button>
               </div>
             </div>
+          </div>
           ))}
+     
         </div>
 
         <div className="pagination-container">
@@ -82,7 +99,7 @@ function ProductsList() {
         onChange={handlePageChange} 
         itemClass="pagination-item"
         linkClass="pagination-link"
-        activeLinkClass="pagination-link active" // Add this line to style the active page
+        activeLinkClass="pagination-link active" 
       />
     </div>
       </div>
