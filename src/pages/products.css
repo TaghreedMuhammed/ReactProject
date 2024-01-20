@@ -83,4 +83,13 @@
     border-radius: 10px;
 }
 
+.details {
+    background-color:rgb(3, 19, 3); 
+    color:white;
+    border: none;
+    border-radius: 10px;
+    margin-right: 10px;
+
+}
+
 

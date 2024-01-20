@@ -113,7 +113,8 @@ function ProductsList() {
                   </p>
 
                   <button
-                    onClick={() => navigate(`/ProductDetails/${product.id}`)}
+                    onClick={() => navigate(`/ProductDetails/${product.id}`)} 
+                    className="details"
                   >
                     ProductDetails
                   </button>
