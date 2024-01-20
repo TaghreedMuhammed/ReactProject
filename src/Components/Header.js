@@ -10,7 +10,7 @@ function Header() {
         </span>
         <Link className="navlink" to="/cart">
         <i
-          class="fa-solid fa-cart-shopping"
+          className="fa-solid fa-cart-shopping"
           style={{ color:"black" ,cursor: "pointer" }}
         ></i>
         </Link>
