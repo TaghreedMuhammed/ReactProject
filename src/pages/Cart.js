@@ -49,7 +49,7 @@ function Cart() {
     }
   }
   return (
-    <section className="h-100" style={{ backgroundColor: "#eee" }}>
+    <section className="h-100">
       <div className="container h-100 py-5">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-10">
@@ -108,7 +108,9 @@ function Cart() {
               );
             })}
           </div>
-          <div style={{ fontSize: "2rem" }}>Total: {total}</div>
+        </div>
+        <div className="mb-3" style={{ fontSize: "2rem", display: "hidden" }}>
+          Total: ${total}
         </div>
       </div>
     </section>

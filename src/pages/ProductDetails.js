@@ -4,13 +4,7 @@ import { Card, CardGroup } from "react-bootstrap";
 import { axiosInstance } from "../apis/config";
 import "./ProductDetailsCss.css";
 import StarRating from "./StarRating";
-import {
-  assignArr,
-  delCart,
-  addTotal,
-  delTotal,
-  addCart,
-} from "../store/slices/cart";
+import { addTotal, addCart } from "../store/slices/cart";
 import { useDispatch, useSelector } from "react-redux";
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -20,8 +14,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const [counter, setCounter] = useState(1);
 
-  const [selectedImage, setSelectedImage] = useState('');
-
+  const [selectedImage, setSelectedImage] = useState("");
 
   function addToCart(product) {
     const newarr = [...items];
@@ -82,7 +75,11 @@ const ProductDetails = () => {
               {product.images.length > 1 ? (
                 <CardGroup className="mt-2">
                   {product.images.map((imageUrl, index) => (
-                    <Card key={index} className="proImages me-1 ms-1"  onClick={() => setSelectedImage(imageUrl)} >
+                    <Card
+                      key={index}
+                      className="proImages me-1 ms-1"
+                      onClick={() => setSelectedImage(imageUrl)}
+                    >
                       <Card.Img
                         className="proImg"
                         variant="top"

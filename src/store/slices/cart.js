@@ -1,8 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-
-// const INITIAL_STATE = {
-//   cart_items: []
-// };
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -31,11 +27,11 @@ const cartSlice = createSlice({
     delTotal: (state, action) => {
       state.total = state.total - action.payload;
     },
-    addItems: (state, action) => {
+    addItems: (state) => {
       state.total_items = state.total_items + 1;
     },
     delItems: (state, action) => {
-      if (state.total_items !== 1) {
+      if (state.total_items !== 0) {
         state.total_items = state.total_items - action.payload;
       }
     },
