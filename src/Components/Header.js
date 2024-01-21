@@ -10,7 +10,7 @@ function Header() {
             <h4>Products</h4>
           </b>
         </span>
-        <ul class="nav justify-content-end">
+        <ul className="nav justify-content-end">
        <li> <Link to ="" className="navlink" style={{ textDecoration: "none",color: "black", cursor: "pointer", fontWeight:'700',marginRight:'30px' }} >Home</Link></li>
         <li><Link style={{ textDecoration: "none" }} className="navlink" to="/cart">
           <i
