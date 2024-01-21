@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import "./ProductsList.css";
+import StarRating from "./StarRating";
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -89,7 +90,7 @@ function ProductsList() {
         <div className="row row-cols-1 row-cols-md-3 g-4 mt-3">
           {dataPerPage.map((product, id) => (
             <div className="col" key={product.id}>
-              <div className="card">
+              <div className="card mycard">
                 <img
                   src={`https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`}
                   className="card-img-top"
@@ -97,28 +98,29 @@ function ProductsList() {
                   style={{ height: "200px", width: "355px" }}
                 />
                 <div className="card-body">
-                  <p className="card-text">
+                  <p className=" text-center stock " >
                     {product.stock > 0 ? (
-                      <span style={{ color: "green" }}>In Stock</span>
+                      <span style={{ backgroundColor: "green" }}>In Stock</span>
                     ) : (
-                      <span style={{ color: "red" }}>Out of Stock</span>
+                      <span style={{ backgroundColor: "red" }}>Out of Stock</span>
                     )}
                   </p>
                   <p className="card-title">
                     <b>{product.title}</b>
                   </p>
                   <p className="card-text">Price: {product.price}$</p>
-                  <p className="card-text">
-                    <b>Rating: {product.rating}</b>
+                  <p className="card-text"><b><StarRating rating={product.rating} /></b>
+                    
+
                   </p>
 
                   <button
                     onClick={() => navigate(`/ProductDetails/${product.id}`)} 
-                    className="details"
+                    className="mydetails"
                   >
                     ProductDetails
                   </button>
-                  <button onClick={() => addToCart(product)} className="cart">
+                  <button onClick={() => addToCart(product)} className="mycart">
                     Add To Cart
                   </button>
                 </div>

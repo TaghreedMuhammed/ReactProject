@@ -76,20 +76,32 @@
     border: none;
 }
 
-.cart {
+.mycart {
     background-color:rgb(3, 19, 3); 
     color:white;
     border: none;
     border-radius: 10px;
+
 }
 
-.details {
+.mycart:hover{
+
+    background-color: gray;
+    color: black;
+}
+
+.mydetails {
     background-color:rgb(3, 19, 3); 
     color:white;
     border: none;
     border-radius: 10px;
     margin-right: 10px;
 
+}
+
+.mydetails:hover{
+    background-color: gray;
+    color: black;
 }
 
 

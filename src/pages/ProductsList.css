@@ -36,3 +36,18 @@
   background-color: #3498db;
   color: #fff;
 }
+.stock {
+
+width: 90px;
+  background-color: green;
+  color: white !important;
+  border-radius: 10px;
+
+  border: none;
+  margin-bottom: 10px;
+}
+
+.mycard{
+
+  box-shadow: 5px 5px 5px gray;
+}

@@ -111,6 +111,7 @@ const ProductDetails = () => {
                   )}
                   /month
                 </h2>
+                <p>suggested payments with 6 months spetial financing</p>
                 <hr className="mt-lg-3 "></hr>
 
                 <button className="stock">
