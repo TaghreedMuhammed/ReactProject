@@ -10,13 +10,16 @@ function Header() {
             <h4>Products</h4>
           </b>
         </span>
-        <Link style={{ textDecoration: "none" }} className="navlink" to="/cart">
+        <ul class="nav justify-content-end">
+       <li> <Link to ="" className="navlink" style={{ textDecoration: "none",color: "black", cursor: "pointer", fontWeight:'700',marginRight:'30px' }} >Home</Link></li>
+        <li><Link style={{ textDecoration: "none" }} className="navlink" to="/cart">
           <i
-            class="fa-solid fa-cart-shopping"
+            className="fa-solid fa-cart-shopping"
             style={{ color: "black", cursor: "pointer" }}
           ></i>
           <span className="ms-2">{items}</span>
-        </Link>
+        </Link></li>
+        </ul>
       </div>
     </nav>
   );

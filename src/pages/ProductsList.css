@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .pagination {
@@ -36,7 +37,8 @@
   background-color: #3498db;
   color: #fff;
 }
-.stock {
+.s
+tock {
 
 width: 90px;
   background-color: green;

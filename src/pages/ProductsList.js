@@ -7,10 +7,16 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import "./ProductsList.css";
 import StarRating from "./StarRating";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
   const navigate = useNavigate();
   const items = useSelector((state) => state.cart.cart_items);
 
@@ -37,26 +43,36 @@ function ProductsList() {
   }, []);
 
   //search
-  const filteredProducts = products.filter((product) => {
-    if (query === "") {
-      return true;
-    } else if (
-      product.title &&
-      product.title.toLowerCase().includes(query.toLowerCase())
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  // const filteredProducts = products.filter((product) => {
+  //   if (query === "") {
+  //     return true;
+  //   } else if (
+  //     product.title &&
+  //     product.title.toLowerCase().includes(query.toLowerCase())
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // });
+  const filteredProducts = products.filter(product => {
+    const categoryFilter =
+      selectedCategory === "All" || product.category.toLowerCase() === selectedCategory.toLowerCase();
+
+    const titleFilter =
+      query === '' || product.title.toLowerCase().includes(query.toLowerCase());
+      return categoryFilter && titleFilter;
+    });
+
   //pagination
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const dataPerPage = filteredProducts.slice(startIndex, endIndex);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    setCurrentPage(1); 
   };
 
   return (
@@ -64,29 +80,45 @@ function ProductsList() {
       <p style={{ marginTop: "10px" }}>
         <b>Welcome To Our Store, Start browsing...</b>
       </p>
-      <input
-        type="text"
-        placeholder="Search and Explore.."
-        className="search"
-        onChange={(event) => setQuery(event.target.value)}
-      />
-      <button className="but1">Search</button>
+      <div className="row container">
+      <input type="text" placeholder="Search and Explore.." className="col-10" 
+      style={{borderRadius:'10px', padding:'3px' ,border:'1px solid #eee'}} onChange={event => setQuery(event.target.value)} />
 
-      <div className="category">
-        <p className="cat">
-          {" "}
-          <b>Categories</b>{" "}
-        </p>
-        <div className="buttons">
-          <button className="but2">All</button>
-          <button className="but3">Laptops</button>
-          <button className="but4">Furniture</button>
-          <button className="but5">Groceries</button>
-          <button className="but6">SkinCare</button>
-          <button className="but7">SmartPhone</button>
-          <button className="but8">SunGlasses</button>
+      </div>
+    
+      <p className='cat' style={{paddingLeft:'10px'}}> <b>Categories</b> </p>
+      <div className="d-grid gap-2 d-none d-md-block">
+        <button className=' Hover 'style={{
+          border: '1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"        }} onClick={() => handleCategoryChange("All")}>All</button>
+          <button className=' Hover 'style={{
+            border:'1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"          }} onClick={() => handleCategoryChange("Laptops")}>Laptops</button>
+          <button className=' Hover 'style={{
+            border:'1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"          }} onClick={() => handleCategoryChange("fragrances")}>Fragrances</button>
+          <button className=' Hover 'style={{
+            border:'1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"          }} onClick={() => handleCategoryChange("groceries")}>Groceries</button>
+          <button className=' Hover 'style={{
+            border:'1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"          }} onClick={() => handleCategoryChange("skincare")}>SkinCare</button>
+          <button className=' Hover 'style={{
+            border:'1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"          }} onClick={() => handleCategoryChange("smartphones")}>smartphones</button>
+          <button className=' Hover 'style={{
+            border:'1px solid',borderRadius:'10px',marginRight:'2px',fontWeight:"bold"          }} onClick={() => handleCategoryChange("home-decoration")}>home-decoration</button>
         </div>
-
+        <div className="d-block d-md-none">
+        <Dropdown onSelect={(category) => handleCategoryChange(category)}>
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            Category
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            {['All', 'Laptops', 'Fragrances', 'Groceries', 'SkinCare', 'smartphones', 'home-decoration'].map(
+              (category) => (
+                <Dropdown.Item key={category} eventKey={category}>
+                  {category}
+                </Dropdown.Item>
+              )
+            )}
+          </Dropdown.Menu>
+        </Dropdown>
+        </div>
         <div className="row row-cols-1 row-cols-md-3 g-4 mt-3">
           {dataPerPage.map((product, id) => (
             <div className="col" key={product.id}>
@@ -95,7 +127,7 @@ function ProductsList() {
                   src={`https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`}
                   className="card-img-top"
                   alt="{product.title}"
-                  style={{ height: "200px", width: "355px" }}
+                  style={{ height: "200px", width: "100%" }}
                 />
                 <div className="card-body">
                   <p className=" text-center stock " >
@@ -109,10 +141,10 @@ function ProductsList() {
                     <b>{product.title}</b>
                   </p>
                   <p className="card-text">Price: {product.price}$</p>
-                  <p className="card-text"><b><StarRating rating={product.rating} /></b>
+                  <div className="my-3"><b ><StarRating rating={product.rating} /></b>
                     
 
-                  </p>
+                  </div>
 
                   <button
                     onClick={() => navigate(`/ProductDetails/${product.id}`)} 
@@ -128,12 +160,11 @@ function ProductsList() {
             </div>
           ))}
         </div>
-
         <div className="pagination-container">
-          <Pagination
+        <Pagination
             activePage={currentPage}
             itemsCountPerPage={itemsPerPage}
-            totalItemsCount={products.length}
+            totalItemsCount={filteredProducts.length}
             pageRangeDisplayed={5}
             onChange={handlePageChange}
             itemClass="pagination-item"
@@ -141,8 +172,8 @@ function ProductsList() {
             activeLinkClass="pagination-link active"
           />
         </div>
-      </div>
-    </div>
+        </div>
+      
   );
 }
 

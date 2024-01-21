@@ -89,6 +89,11 @@
     background-color: gray;
     color: black;
 }
+.Hover:hover{
+    background-color: #777;
+    color: white;
+    
+}
 
 .mydetails {
     background-color:rgb(3, 19, 3); 
