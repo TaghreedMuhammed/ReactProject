@@ -20,6 +20,9 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const [counter, setCounter] = useState(1);
 
+  const [selectedImage, setSelectedImage] = useState('');
+
+
   function addToCart(product) {
     const newarr = [...items];
     const exist = newarr.find((x) => x.id === product.id);
@@ -54,6 +57,7 @@ const ProductDetails = () => {
       .get(`/products/${params.id}`)
       .then((response) => {
         setProduct(response.data);
+        setSelectedImage(response.data.thumbnail);
       })
       .catch((error) => {
         console.error("Error fetching product details:", error);
@@ -72,13 +76,13 @@ const ProductDetails = () => {
             <div className=" col-lg-6  col-md-12 col-sm-12  ">
               <div className="proThumbnail ">
                 {" "}
-                <img className="proImg" src={product.thumbnail} alt="" />
+                <img className="proImg" src={selectedImage} alt="" />
               </div>
 
               {product.images.length > 1 ? (
                 <CardGroup className="mt-2">
                   {product.images.map((imageUrl, index) => (
-                    <Card key={index} className="proImages me-1 ms-1">
+                    <Card key={index} className="proImages me-1 ms-1"  onClick={() => setSelectedImage(imageUrl)} >
                       <Card.Img
                         className="proImg"
                         variant="top"
